@@ -1,0 +1,24 @@
+@import '@sass/variables';
+
+@mixin flex-center($direction: row, $justify: center) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: center;
+    justify-content: $justify;
+}
+
+@mixin shadow-transition {
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property: box-shadow, background-color;
+    transition-duration: 0.2s, 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1), cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0s, 0s;
+}
+
+@mixin shadow-bar($color: $c-p) {
+    box-shadow: 0 4px 20px 0 rgb(0, 0, 0, 0.14), 0 7px 10px -5px rgb($color, 0.4);
+}
+
+@mixin shadow-card {
+    box-shadow: 0 1px 4px 0 rgb(0, 0, 0, 0.14);
+}

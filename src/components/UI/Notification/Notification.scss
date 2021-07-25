@@ -1,0 +1,50 @@
+@import "@sass/variables";
+@import "@sass/mixins";
+
+@mixin theme($color) {
+    @include shadow-bar($color);
+
+    color: $t-l;
+    background: $color;
+}
+
+.notification {
+    @include theme($c-p);
+    @include flex-center(row, space-between);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 4rem;
+
+    padding: 0 2rem;
+
+    & > .message {
+        @include flex-center;
+    }
+
+    &.secondary {
+        @include theme($c-s);
+    }
+
+    &.info {
+        @include theme($c-info);
+    }
+
+    &.success {
+        @include theme($c-success);
+    }
+
+    &.warning {
+        @include theme($c-warning);
+    }
+
+    &.danger {
+        @include theme($c-danger);
+    }
+    &.rose {
+        @include theme($c-rose);
+    }
+}

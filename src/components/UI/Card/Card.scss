@@ -1,0 +1,16 @@
+@import '@sass/variables';
+@import '@sass/mixins';
+
+.card {
+    position: relative;
+    @include flex-center(column);
+
+    min-height: 2rem;
+
+    border-radius: $br-lg;
+    margin: 1rem;
+
+    background: white;
+
+    @include shadow-card;
+}

@@ -1,0 +1,88 @@
+@import "@sass/variables";
+@import "@sass/mixins";
+
+@mixin shadow($theme) {
+    box-shadow: 0 2px 2px 0 rgba($theme, 0.14), 0 3px 1px -2px rgba($theme, 0.2), 0 1px 5px 0 rgba($theme, 0.12);
+}
+
+@mixin hover-shadow($theme) {
+    box-shadow: 0 14px 26px -12px rgba($theme, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12),
+        0 8px 10px -5px rgba($theme, 0.2);
+}
+
+@mixin theme($color) {
+    @include shadow($color);
+
+    color: $t-l;
+    background: $color;
+
+    &:hover {
+        @include hover-shadow($color);
+    }
+}
+
+a {
+    text-decoration: none;
+    position: relative;
+
+    outline: none;
+    border: none;
+    border-radius: $br-sm;
+    background: none;
+
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    color: $t-d;
+
+    height: 3rem;
+
+    padding: 12px;
+
+    overflow: hidden;
+
+    @include shadow-transition;
+
+    &.primary {
+        @include theme($c-p);
+    }
+
+    &.secondary {
+        @include theme($c-s);
+    }
+
+    &.info {
+        @include theme($c-info);
+    }
+
+    &.success {
+        @include theme($c-success);
+    }
+
+    &.warning {
+        @include theme($c-warning);
+    }
+
+    &.danger {
+        @include theme($c-danger);
+    }
+    &.rose {
+        @include theme($c-rose);
+    }
+
+    &.round {
+        border-radius: $br-r;
+    }
+
+    &.direction-column {
+        flex-direction: column;
+    }
+
+    & > .waves-effect {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+}

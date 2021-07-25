@@ -1,0 +1,117 @@
+@import "@sass/variables";
+@import "@sass/mixins";
+
+@mixin theme($color: $c-p) {
+    background: $color;
+    @include shadow-bar($color);
+}
+
+.card-header {
+    margin-top: 2rem;
+
+    & > .card {
+        & > .content {
+            @include flex-center(column);
+
+            width: 100%;
+            padding: 1rem;
+        }
+    }
+    
+    & > .card > .header {
+        position: relative;
+
+        min-width: 21.5rem;
+        width: 100%;
+        height: 5rem;
+
+        &.map {
+            height: 25rem;
+        }
+
+        @include flex-center;
+        justify-content: flex-end;
+
+        padding: 1rem;
+
+        border-radius: $br-lg;
+
+        & > .title {
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+
+            color: $t-l;
+
+            font-size: 1.5rem;
+
+            @include flex-center(column);
+
+            width: 5rem;
+            height: 5rem;
+
+            border-radius: $br-sm;
+            padding: 1rem;
+
+            overflow: hidden;
+
+            @include theme;
+
+            &.small {
+                width: 4rem;
+                height: 4rem;
+            }
+
+            &.full-size {
+                width: calc(100% - 2rem);
+            }
+
+            &.auto {
+                width: auto;
+                max-width: calc(100% - 2rem);
+            }
+
+            &.map {
+                width: calc(100% - 2rem);
+                height: 25rem;
+                padding: 0;
+            }
+
+            &.primary {
+                @include theme($c-p);
+            }
+
+            &.secondary {
+                @include theme($c-s);
+            }
+
+            &.info {
+                @include theme($c-info);
+            }
+
+            &.success {
+                @include theme($c-success);
+            }
+
+            &.warning {
+                @include theme($c-warning);
+            }
+
+            &.danger {
+                @include theme($c-danger);
+            }
+            &.rose {
+                @include theme($c-rose);
+            }
+        }
+
+        & > .side-content {
+            text-align: right;
+
+            & > .title {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+}
