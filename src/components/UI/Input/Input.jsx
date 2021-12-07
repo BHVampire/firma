@@ -2,16 +2,22 @@ import './Input.scss'
 import { useState } from "react"
 import useOnclickOutside from "react-cool-onclickoutside"
 import Icon from '../Icon/Icon'
+import Button from '../Button/Button'
+import Tooltip from '../Tooltip/Tooltip'
 
 const Input = ({
     value = '',
     setValue = null,
     onChange,
     label = 'Label',
+    centeredLabel = true,
     type = 'text',
     theme = 'primary',
     icon = null,
     iconSize = 1.5,
+    onClick = false,
+    tooltip,
+    width,
     ...rest
 }) => {
 
@@ -22,7 +28,16 @@ const Input = ({
     })
 
     return (
-        <div className={`custom-input ${theme}`}>
+        <div className={`custom-input ${theme}`} style={{ width: width ? `${width}rem` : '' }}>
+            {
+                tooltip
+                    ? <Tooltip
+                        placement="auto"
+                        text={tooltip}
+                    />
+                    : ''
+            }
+
             <input {...rest}
                 type={type}
                 ref={ref}
@@ -30,10 +45,24 @@ const Input = ({
                 onChange={setValue ? e => setValue(e.target.value) : onChange}
                 value={value}
             />
-            <label className={`${openMenu || value.length > 0 ? 'active' : null} ${theme}`}>{label}</label>
+            <label className={`label ${openMenu || value.length > 0 ? 'active' : ''} ${theme} ${centeredLabel ? 'centeredLabel' : ''}`}>{label}</label>
             {
                 icon
-                    ? <Icon icon={icon} size={iconSize} />
+                    ? onClick
+                        ? <Button
+                            icon={icon}
+                            size={2}
+                            round={true}
+                            iconSize={iconSize}
+                            iconTheme={openMenu || value.length > 0 ? theme : ''}
+                            waves="red"
+                            onClick={() => onClick()}
+                        />
+                        : <Icon
+                            icon={icon}
+                            size={iconSize}
+                            theme={openMenu || value.length > 0 ? theme : null}
+                        />
                     : null
             }
         </div>

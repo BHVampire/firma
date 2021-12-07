@@ -1,4 +1,33 @@
+@import "@sass/variables";
+
 .icon {
     user-select: none;
     margin: 0.2rem;
+
+    &.primary {
+        color: $c-p;
+    }
+
+    &.secondary {
+        color: $c-s;
+    }
+
+    &.info {
+        color: $c-info;
+    }
+
+    &.success {
+        color: $c-success;
+    }
+
+    &.warning {
+        color: $c-warning;
+    }
+
+    &.danger {
+        color: $c-danger;
+    }
+    &.rose {
+        color: $c-rose;
+    }
 }

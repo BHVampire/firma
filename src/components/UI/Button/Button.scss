@@ -16,7 +16,7 @@
     color: $t-l;
     background: $color;
 
-    &:hover {
+    &:hover, &:focus, &:active {
         @include hover-shadow($color);
     }
 }

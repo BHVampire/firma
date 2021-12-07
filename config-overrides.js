@@ -1,9 +1,7 @@
-const {alias} = require('react-app-rewire-alias')
+const { alias } = require('react-app-rewire-alias')
+const { useBabelRc, override } = require('customize-cra')
 
-module.exports = function override(config) {
-  alias({
-    '@sass': 'src/styles/sass'
-  })(config)
-
-  return config
-}
+module.exports = override(
+  useBabelRc(),
+  alias({ '@sass': 'src/styles/sass' })
+)

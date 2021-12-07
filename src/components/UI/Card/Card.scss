@@ -1,8 +1,9 @@
-@import '@sass/variables';
-@import '@sass/mixins';
+@import "@sass/variables";
+@import "@sass/mixins";
 
 .card {
     position: relative;
+
     @include flex-center(column);
 
     min-height: 2rem;

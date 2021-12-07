@@ -1,9 +1,11 @@
 import Icon from '../Icon/Icon'
-import './Button.scss'
+import './Button.scss' 
 
 const Button = ({
     icon = null,
     iconSize = 1.5,
+    iconTheme,
+    iconStyle,
     round = false,
     color = null,
     theme = null,
@@ -36,7 +38,7 @@ const Button = ({
         >
             {
                 icon
-                    ? <Icon icon={icon} size={iconSize} />
+                    ? <Icon icon={icon} size={iconSize} theme={iconTheme} style={iconStyle} />
                     : null
             }
 

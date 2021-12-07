@@ -3,9 +3,12 @@ import './Icon.scss'
 
 const Icon = ({
     size = null,
-    color = 'inherit',
+    color,
+    theme,
     icon = 'favorite',
     style = 'round',
+    margin,
+    units = 'rem',
     ...rest
 }) => {
 
@@ -33,8 +36,8 @@ const Icon = ({
 
     return (
         <span
-            className={`${iconStyle} icon ${rest.className ? rest.className : ''}`}
-            style={{ fontSize: size ? `${size}rem` : 'inherit', color: color }}
+            className={`${iconStyle} ${theme} icon ${rest.className ? rest.className : ''}`}
+            style={{ fontSize: size ? `${size}${units}` : 'inherit', color, margin, ...rest.style }}
         >
             {icon}
         </span>

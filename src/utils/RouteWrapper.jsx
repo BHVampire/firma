@@ -1,11 +1,16 @@
+import { useMemo } from "react"
 import { Route } from "react-router"
 
-const RouteWrapper = ({ component: Component, layout: Layout, roles = [], ...rest }) => {
+const RouteWrapper = ({ component: Component, layout, roles = [], ...rest }) => {
+    const Layout = useMemo(() => layout, [layout])
+
     return (
         <Route {...rest} render={(props) =>
-            <Layout {...props}>
-                <Component {...props} />
-            </Layout>
+            Layout
+                ? <Layout {...props}>
+                    <Component {...props} />
+                </Layout>
+                : <Component {...props} />
         } />
     )
 }

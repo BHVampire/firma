@@ -42,13 +42,19 @@
         width: 100%;
 
         background: none;
+
+        pointer-events: all;
+
+        &:disabled {
+            color: rgba($t-d, 0.5);
+        }
     }
 
     & > label {
         position: absolute;
-        left: 50%;
+        left: 0;
         top: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(0, -50%);
 
         white-space: nowrap;
 
@@ -58,13 +64,17 @@
 
         transition: 0.2s ease all;
 
+        &.centeredLabel {
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
         &.active {
             top: 0;
             left: 0;
-            transform: translate(0, -100%);
+            transform: translate(0, -75%);
 
             font-size: 0.8rem;
-
             color: $c-p;
 
             &.primary {
@@ -92,6 +102,9 @@
             }
             &.rose {
                 @include theme-label($c-rose);
+            }
+            &.dark {
+                @include theme-label($c-dark);
             }
         }
     }

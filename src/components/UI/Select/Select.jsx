@@ -1,59 +1,59 @@
 import './Select.scss'
 import { Fragment, useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
-import normalize from '../../../utils/normalize'
 
 import useOnclickOutside from "react-cool-onclickoutside"
+import Tooltip from '../Tooltip/Tooltip'
 
 
-const Select = ({ options, label = 'Label', value, setValue, ...rest }) => {
-    const [input, setInput] = useState('')
+const Select = ({ options,
+    centeredLabel = true,
+    label = 'Label',
+    value = '',
+    setValue,
+    useKey = false,
+    hidden,
+    tooltip,
+    ...rest
+}) => {
+    const [input, setInput] = useState(options[value])
     const [checked, setChecked] = useState('')
-    const [results, setResults] = useState(options)
 
     const [openMenu, setOpenMenu] = useState(false)
 
     useEffect(() => {
-
-        if(value === 0){
-            setInput('')
+        if (value) {
+            useKey ? setInput(options[value]) : setInput(value)
+        } else {
+            setInput(value)
         }
-        
     }, [value])
 
     const ref = useOnclickOutside(() => {
         setOpenMenu(false)
+        setChecked(false)
     })
 
-    useEffect(() => {
-        if (options) {
-            const handleSearch = () => {
-                let temp = {}
-                const normalizedInput = normalize(input)
-
-                Object.keys(options).forEach(e => {
-                    const normalizedObject = normalize(`${e} ${options[e]}`)
-
-                    if (normalizedObject.includes(normalizedInput)) {
-                        temp = {
-                            ...temp,
-                            [e]: options[e]
-                        }
-                    }
-                })
-                setResults(temp)
-            }
-            handleSearch()
-        }
-    }, [input, options]) // eslint-disable-line react-hooks/exhaustive-deps
-
     return (
+        <div className="custom-select-wrapper" hidden={hidden}>
+            <div className="custom-select" onClick={() => {
+                setChecked(true)
+                setOpenMenu(true)
+            }}>
+                {
+                    tooltip
+                        ? <Tooltip
+                            placement="auto"
+                            text={tooltip}
+                            style={{ top: '-25%' }}
+                        />
+                        : ''
+                }
 
-        <div className="custom-select-wrapper">
-            <div className="custom-select">
                 <input {...rest}
+                    disabled
                     type="text"
-                    ref={ ref }
+                    value={input}
                     onChange={e => setInput(e.target.value)}
                     onFocus={() => setChecked(true)}
                     onBlur={() => {
@@ -65,10 +65,9 @@ const Select = ({ options, label = 'Label', value, setValue, ...rest }) => {
                             setInput(options[value] || '')
                         }
                     }}
-                    value={input}
                 />
 
-                <label className={openMenu || value.length > 0 ? 'active' : ''}>{label}</label>
+                <label className={`${openMenu || value.length > 0 ? 'active' : ''} ${centeredLabel ? 'centeredLabel' : ''}`}>{label}</label>
 
                 <span className="material-icons-outlined icon">
                     {
@@ -84,13 +83,13 @@ const Select = ({ options, label = 'Label', value, setValue, ...rest }) => {
             {
                 checked > 0
                     ?
-                    <div className="drop-down">
+                    <div ref={ref} className="drop-down">
                         {
-                            Object.keys(results).length > 0
+                            Object.keys(options).length > 0
                                 ?
                                 <Fragment>
                                     {
-                                        Object.keys(results).map(e => (
+                                        Object.keys(options).map(e => (
                                             <li
                                                 key={uuid()}
                                                 onMouseDown={() => {
@@ -108,7 +107,7 @@ const Select = ({ options, label = 'Label', value, setValue, ...rest }) => {
                         }
                     </div>
                     :
-                    null
+                    ''
             }
 
         </div>

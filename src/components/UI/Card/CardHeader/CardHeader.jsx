@@ -11,7 +11,9 @@ const CardHeader = ({ children,
     iconSize = 2.5,
     theme = null,
     headerSize = null,
-    map = false
+    contentClassName = null,
+    map = false,
+    ...rest
 }) => {
     return (
         <div className={`card-header ${map ? 'map' : null}`} >
@@ -24,8 +26,10 @@ const CardHeader = ({ children,
                     >
                         {
                             !map
-                            ? <Icon size={iconSize} icon={icon} />
-                            : null
+                                ? icon
+                                    ? <Icon size={iconSize} icon={icon} />
+                                    : null
+                                : null
                         }
                         {headerTitle}
                     </div>
@@ -36,8 +40,8 @@ const CardHeader = ({ children,
 
                     </div>
                 </div>
-                
-                <div className="content">
+
+                <div className={`content ${contentClassName}`} style={{ ...rest.style }}>
                     {children}
                 </div>
             </Card>
